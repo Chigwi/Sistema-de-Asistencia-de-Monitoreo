@@ -1,3 +1,20 @@
+
+mod schema;
+mod db;
+
+//module declarations
+mod models;
+
+mod repositories;
+
+mod services;
+
+mod commands;
+
+
+
+
+
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use chrono::{Local};
 
