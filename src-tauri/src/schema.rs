@@ -8,10 +8,8 @@ diesel::table! {
         nombre -> Varchar,
         #[max_length = 50]
         cedula -> Varchar,
-        #[sql_name = "contraseña"]
-        #[max_length = 50]
-        contrase_a -> Varchar,
-        logged_in -> Nullable<Bool>,
+        #[max_length = 255]
+        contrasenna -> Varchar,
         horario_establecido -> Nullable<Int4>,
     }
 }
@@ -21,10 +19,10 @@ diesel::table! {
         id_historial_empleado -> Int4,
         empleado -> Int4,
         hora_inicio -> Time,
-        hora_salida -> Time,
-        horas_trabajadas -> Nullable<Int4>,
-        horas_establecidas -> Int4,
-        horas_extras -> Nullable<Bool>,
+        hora_salida -> Nullable<Time>,
+        minutos_trabajadas -> Nullable<Int4>,
+        minutos_establecidas -> Int4,
+        minutos_extras -> Nullable<Int4>,
         notas -> Nullable<Text>,
         fecha -> Date,
     }
@@ -35,8 +33,8 @@ diesel::table! {
         id_horario -> Int4,
         hora_inicio -> Time,
         hora_salida -> Time,
-        tiempo_descasnso -> Int4,
-        horas_establecidas -> Int4,
+        tiempo_descanso -> Int4,
+        minutos_establecidas -> Int4,
     }
 }
 
