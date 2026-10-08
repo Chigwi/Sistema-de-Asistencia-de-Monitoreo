@@ -27,7 +27,7 @@ pub fn find_by_id(conn: &mut PgConnection, id: i32) -> QueryResult<Option<Rol>> 
 //find by name
 pub fn find_by_name(conn: &mut PgConnection, name: &str) -> QueryResult<Option<Rol>> {
     rol::table
-        .filter(rol::name.eq(name))
+        .filter(rol::nombre_rol.eq(name))
         .select(Rol::as_select())
         .first(conn).optional()
 }
