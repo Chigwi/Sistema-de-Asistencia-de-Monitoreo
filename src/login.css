@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Bitcount Single", system-ui;
     background: rgb(97, 64, 81);
     display: flex;
     justify-content: center;
@@ -15,10 +15,12 @@ body {
     text-align: center;
 }
 .login-box h1{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: #e1e1e1;
+    font-weight: 500;
 }
 .login-box input{
+    font-family: "Cascadia Mono", sans-serif;
     width: 90%;
     padding: 20px;
     border: 1px solid #e1d7e4;
@@ -27,6 +29,8 @@ body {
     margin: 10px;
 }
 .login-box button{
+    font-family: "Cascadia Mono", sans-serif;
+    margin-top: 20px;
     width: 90%;
     padding: 30;
     background: #131114;
