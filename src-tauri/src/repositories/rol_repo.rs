@@ -24,6 +24,14 @@ pub fn find_by_id(conn: &mut PgConnection, id: i32) -> QueryResult<Option<Rol>> 
         .first(conn).optional()
 }
 
+//find by name
+pub fn find_by_name(conn: &mut PgConnection, name: &str) -> QueryResult<Option<Rol>> {
+    rol::table
+        .filter(rol::name.eq(name))
+        .select(Rol::as_select())
+        .first(conn).optional()
+}
+
 //delete by id
 pub fn delete_by_id(conn: &mut PgConnection, id: i32) -> QueryResult<usize> {
     diesel::delete(rol::table.find(id)).execute(conn)
