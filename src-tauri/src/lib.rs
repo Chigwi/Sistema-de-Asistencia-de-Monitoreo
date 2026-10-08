@@ -13,6 +13,8 @@ mod commands;
 
 mod error;
 
+mod session;
+
 
 
 
