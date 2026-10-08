@@ -7,7 +7,6 @@ body {
     height: 100vh;
 }
 .login-box {
-    width: 100%;
     background: rgb(107, 83, 155);
     padding: 30px;
     border-radius: 10px;

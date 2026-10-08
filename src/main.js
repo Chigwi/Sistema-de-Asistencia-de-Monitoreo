@@ -15,6 +15,17 @@ function login(){
     }
 }
 
+function toggleDescanso(){
+  if(getComputedStyle(document.body).backgroundColor === "rgb(74, 47, 98)"){
+    document.body.style.backgroundColor = "rgb(209, 179, 226)"; 
+    document.getElementById("btnDescanso").textContent = "retomar trabajo"
+  }else{
+    document.body.style.backgroundColor = "rgb(74, 47, 98)";
+    document.getElementById("btnDescanso").textContent = "tomar descanso"
+
+  }
+}
+
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
   greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
