@@ -4,6 +4,8 @@ CREATE TABLE rol(
                     nombre_rol varchar(50) NOT NULL UNIQUE
 );
 
+INSERT INTO rol (nombre_rol) VALUES ('Admin'), ('Empleado');
+
 CREATE TABLE horario(
                         id_horario SERIAL PRIMARY KEY,
                         hora_inicio TIME(0) NOT NULL,
