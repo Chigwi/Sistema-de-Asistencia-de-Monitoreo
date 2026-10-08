@@ -47,3 +47,21 @@ pub fn delete_by_id(conn: &mut PgConnection, id: i32) -> QueryResult<usize> {
     diesel::delete(empleado::table.find(id)).execute(conn)
 }
 
+//set on break
+pub fn set_on_break(conn: &mut PgConnection, id: i32, on_break: bool) -> QueryResult<Empleado> {
+    diesel::update(empleado::table.find(id))
+        .set(empleado::en_descanso.eq(on_break))
+        .returning(Empleado::as_returning())
+        .get_result(conn)
+}
+
+//find employees on break
+pub fn find_on_break(conn: &mut PgConnection) -> QueryResult<Vec<Empleado>> {
+    empleado::table
+        .filter(empleado::en_descanso.eq(true))
+        .select(Empleado::as_select())
+        .load(conn) 
+}
+
+
+
