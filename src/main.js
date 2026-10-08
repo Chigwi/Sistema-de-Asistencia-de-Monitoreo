@@ -16,11 +16,11 @@ function login(){
 }
 
 function toggleDescanso(){
-  if(getComputedStyle(document.body).backgroundColor === "rgb(74, 47, 98)"){
-    document.body.style.backgroundColor = "rgb(209, 179, 226)"; 
+  if(getComputedStyle(document.body).backgroundColor === "rgb(97, 64, 81)"){
+    document.body.style.backgroundColor = "rgb(64, 97, 64)"; 
     document.getElementById("btnDescanso").textContent = "retomar trabajo"
   }else{
-    document.body.style.backgroundColor = "rgb(74, 47, 98)";
+    document.body.style.backgroundColor = "rgb(97, 64, 81)";
     document.getElementById("btnDescanso").textContent = "tomar descanso"
 
   }
