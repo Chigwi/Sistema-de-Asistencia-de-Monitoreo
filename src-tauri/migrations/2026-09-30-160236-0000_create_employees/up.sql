@@ -19,7 +19,8 @@ CREATE TABLE empleado (
                           nombre varchar(100) NOT NULL,
                           cedula varchar(50) NOT NULL,
                           contrasenna varchar(255) NOT NULL,
-                          horario_establecido integer REFERENCES horario (id_horario)
+                          horario_establecido integer REFERENCES horario (id_horario),
+                          en_descanso boolean NOT NULL DEFAULT false
 );
 
 CREATE TABLE historial_horario(
@@ -32,4 +33,11 @@ CREATE TABLE historial_horario(
                                   minutos_extras integer,
                                   notas text,
                                   fecha DATE NOT NULL
+);
+
+CREATE TABLE historial_descanso(
+                                 id_historial_descanso SERIAL PRIMARY KEY,
+                                 historial_horario integer NOT NULL REFERENCES historial_horario (id_historial_empleado),
+                                 hora_inicio TIME(0) NOT NULL,
+                                 hora_salida TIME(0)
 );
