@@ -11,6 +11,8 @@ mod services;
 
 mod commands;
 
+mod error;
+
 
 
 
