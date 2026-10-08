@@ -14,7 +14,7 @@ pub struct Horario{
     pub hora_inicio: NaiveTime,
     pub hora_salida: NaiveTime,
     pub tiempo_descanso: i32,
-    pub minutos_establecidos: i32,
+    pub minutos_establecidas: i32,
 }
 
 //insertable entity
@@ -25,5 +25,5 @@ pub struct NewHorario{
     pub hora_inicio: NaiveTime,
     pub hora_salida: NaiveTime,
     pub tiempo_descanso: i32,
-    pub minutos_establecidos: i32,
+    pub minutos_establecidas: i32,
 }

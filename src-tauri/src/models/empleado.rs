@@ -13,7 +13,7 @@ pub struct Empleado{
     pub nombre: String,
     pub cedula: String,
     pub contrasenna: String,
-    pub horario_establecido: i32,
+    pub horario_establecido: Option<i32>,
 }
 
 //insertable entity
@@ -24,5 +24,5 @@ pub struct NewEmpleado{
     pub nombre: String,
     pub cedula: String,
     pub contrasenna: String,
-    pub horario_establecido: i32,
+    pub horario_establecido: Option<i32>,
 }

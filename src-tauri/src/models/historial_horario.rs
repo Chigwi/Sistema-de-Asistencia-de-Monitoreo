@@ -1,24 +1,25 @@
 use diesel::prelude::*;
 use serde::{Deserialize,Serialize};
 use chrono::NaiveTime;
+use chrono::NaiveDate;
 use crate::schema::historial_horario;
 
 
 
 //readable entity
 #[derive(Queryable, Selectable, Serialize)]
-#[diesel(table_name= historial_horario)]
-#diesel(check_for_backend(diesel::pg::Pg))
+#[diesel(table_name = historial_horario)]
+#[diesel(check_for_backend(diesel::pg::Pg))]
 pub struct HistorialHorario{
     pub id_historial_empleado: i32,
     pub empleado: i32,
     pub hora_inicio: NaiveTime,
-    pub hora_salida: NaiveTime,
-    pub minutos_trabajados: i32,
+    pub hora_salida: Option<NaiveTime>,
+    pub minutos_trabajadas: Option<i32>,
     pub minutos_establecidas: i32,
-    pub minutos_extras: i32,
-    pub notas: String,
-    pub fecha: NaiveTime,
+    pub minutos_extras: Option<i32>,
+    pub notas: Option<String>,
+    pub fecha: NaiveDate
 }
 
 //insertable entity
@@ -28,9 +29,9 @@ pub struct NewHistorialHorario{
     pub empleado: i32,
     pub hora_inicio: NaiveTime,
     pub hora_salida: NaiveTime,
-    pub minutos_trabajados: i32,
+    pub minutos_trabajadas: i32,
     pub minutos_establecidas: i32,
     pub minutos_extras: i32,
     pub notas: String,
-    pub fecha: NaiveTime,
+    pub fecha: NaiveDate,
 }
