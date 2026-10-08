@@ -1,5 +1,5 @@
 use diesel::prelude::*;
-use crate::models::empleado::{Empleado, NewEmpleado, RegisterEmpleado, UpdateEmpleado};
+use crate::models::empleado::{Empleado, NewEmpleado, UpdateEmpleado};
 use crate::schema::empleado;
 
 
@@ -24,7 +24,26 @@ pub fn find_by_id(conn: &mut PgConnection, id: i32) -> QueryResult<Option<Emplea
         .first(conn).optional()
 }
 
+//find by cedula
+pub fn find_by_cedula(conn: &mut PgConnection, cedula: &str) -> QueryResult<Option<Empleado>>{
+    empleado::table
+        .filter(empleado::cedula.eq(cedula))
+        .select(Empleado::as_select())
+        .first(conn).optional()
+
+}
+
+//update
+pub fn update(conn: &mut PgConnection, id: i32, changes: &UpdateEmpleado) -> QueryResult<Empleado> {
+    diesel::update(empleado::table.find(id))
+        .set(changes)
+        .returning(Empleado::as_returning())
+        .get_result(conn)
+}
+
+
 //delete by id
 pub fn delete_by_id(conn: &mut PgConnection, id: i32) -> QueryResult<usize> {
     diesel::delete(empleado::table.find(id)).execute(conn)
 }
+
