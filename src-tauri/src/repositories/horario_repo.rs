@@ -20,13 +20,13 @@ pub fn find_all(conn: &mut PgConnection) -> QueryResult<Vec<Horario>> {
 pub fn find_by_id(conn: &mut PgConnection, id: i32) -> QueryResult<Option<Horario>> {
     horario::table
         .find(id)
-        .select(horario::as_select())
+        .select(Horario::as_select())
         .first(conn).optional()
 }
 
 //delete by id
 pub fn delete_by_id(conn: &mut PgConnection, id: i32) -> QueryResult<usize> {
-    diesel::delete(Horario::table.find(id)).execute(conn)
+    diesel::delete(horario::table.find(id)).execute(conn)
 }
 
 
