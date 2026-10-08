@@ -12,9 +12,12 @@ pub struct Empleado{
     pub rol_empleado: i32,
     pub nombre: String,
     pub cedula: String,
+    #[serde(skip_serializing)]
     pub contrasenna: String,
     pub horario_establecido: Option<i32>,
 }
+
+
 
 //insertable entity
 #[derive(Insertable , Deserialize)]
@@ -24,5 +27,24 @@ pub struct NewEmpleado{
     pub nombre: String,
     pub cedula: String,
     pub contrasenna: String,
+    pub horario_establecido: Option<i32>,
+}
+
+//frontend entity
+#[derive(Deserialize)]
+pub struct RegisterEmpleado {
+    pub rol_empleado: i32,
+    pub nombre: String,
+    pub cedula: String,
+    pub contrasena: String,
+    pub horario_establecido: Option<i32>,
+}
+
+//updatable entity
+#[derive(AsChangeset, Deserialize)]
+#[diesel(table_name = empleado)]
+pub struct UpdateEmpleado {
+    pub nombre: Option<String>,
+    pub rol_empleado: Option<i32>,
     pub horario_establecido: Option<i32>,
 }

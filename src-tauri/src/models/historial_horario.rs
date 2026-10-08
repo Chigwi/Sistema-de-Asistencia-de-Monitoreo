@@ -35,3 +35,18 @@ pub struct NewHistorialHorario{
     pub notas: String,
     pub fecha: NaiveDate,
 }
+
+//clockin entity
+pub struct ClockIn{
+    pub empleado: i32,
+    pub hora_inicio: NaiveTime,
+    pub minutos_establecidas: i32,
+    pub fecha: NaiveDate
+}
+
+//clockout entity
+pub struct ClockOut{
+    pub hora_salida: NaiveTime,
+    pub minutos_trabajadas: i32,
+    pub minutos_extras: i32,
+}
