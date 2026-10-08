@@ -38,6 +38,6 @@ CREATE TABLE historial_horario(
 CREATE TABLE historial_descanso(
                                  id_historial_descanso SERIAL PRIMARY KEY,
                                  historial_horario integer NOT NULL REFERENCES historial_horario (id_historial_empleado),
-                                 hora_inicio TIME(0) NOT NULL,
-                                 hora_salida TIME(0)
+                                 hora_inicio TIME NOT NULL,
+                                 hora_salida TIME
 );
