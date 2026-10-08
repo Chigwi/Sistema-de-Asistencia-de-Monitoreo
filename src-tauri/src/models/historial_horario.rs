@@ -37,6 +37,8 @@ pub struct NewHistorialHorario{
 }
 
 //clockin entity
+#[derive(Insertable)]
+#[diesel(table_name = historial_horario)]
 pub struct ClockIn{
     pub empleado: i32,
     pub hora_inicio: NaiveTime,
@@ -45,6 +47,8 @@ pub struct ClockIn{
 }
 
 //clockout entity
+#[derive(AsChangeset)]
+#[diesel(table_name = historial_horario)]
 pub struct ClockOut{
     pub hora_salida: NaiveTime,
     pub minutos_trabajadas: i32,

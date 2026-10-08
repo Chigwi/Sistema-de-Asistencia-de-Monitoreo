@@ -20,7 +20,7 @@ pub struct Empleado{
 
 
 //insertable entity
-#[derive(Insertable , Deserialize)]
+#[derive(Insertable)]
 #[diesel(table_name = empleado)]
 pub struct NewEmpleado{
     pub rol_empleado: i32,
@@ -36,7 +36,7 @@ pub struct RegisterEmpleado {
     pub rol_empleado: i32,
     pub nombre: String,
     pub cedula: String,
-    pub contrasena: String,
+    pub contrasenna: String,
     pub horario_establecido: Option<i32>,
 }
 
