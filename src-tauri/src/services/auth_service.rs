@@ -57,7 +57,30 @@ pub fn login(conn: &mut PgConnection, cedula: &str, password: &str) -> Result<Se
     Ok(Session { id_empleado: emp.id_empleado, rol })
 }
 
+pub fn ensure_first_admin(conn: &mut PgConnection) -> Result<(), AppError> {
+    if empleado_repo::count_all(conn)? > 0 {
+        return Ok(());
+    }
 
+    let cedula = std::env::var("ADMIN_CEDULA")
+        .map_err(|_| AppError::Internal("ADMIN_CEDULA is not set".into()))?;
+    let password = std::env::var("ADMIN_PASSWORD")
+        .map_err(|_| AppError::Internal("ADMIN_PASSWORD is not set".into()))?;
+
+    let rol = rol_repo::find_by_name(conn, "admin")?
+        .ok_or(AppError::Internal("Role 'admin' is not seeded".into()))?;
+
+    let new = NewEmpleado {
+        rol_empleado: rol.id_rol,
+        nombre: "Administrador".into(),
+        cedula,
+        contrasenna: hash_password(&password)?,
+        horario_establecido: None,
+    };
+
+    empleado_repo::insert(conn, &new)?;
+    Ok(())
+}
 
 
 
