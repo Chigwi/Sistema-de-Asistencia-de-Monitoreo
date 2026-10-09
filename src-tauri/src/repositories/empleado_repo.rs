@@ -64,6 +64,7 @@ pub fn find_on_break(conn: &mut PgConnection) -> QueryResult<Vec<Empleado>> {
 }
 
 
+
 //count employees
 pub fn count_all(conn: &mut PgConnection) -> QueryResult<i64> {
     empleado::table.count().get_result(conn)

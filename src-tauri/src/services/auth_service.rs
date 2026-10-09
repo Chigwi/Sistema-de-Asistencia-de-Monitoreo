@@ -8,9 +8,10 @@ use argon2::{
 //diesel
 use diesel::prelude::*;
 //local
-use crate::error::AppError::{self, InvalidCredentials};
+use crate::error::AppError;
 use crate::repositories::{empleado_repo, rol_repo};
 use crate::session::{Role, Session};
+use crate::models::empleado::NewEmpleado;
 
 //hashing of passwords using argon2
 pub fn hash_password(plain: &str) -> Result<String, AppError> {
@@ -85,14 +86,14 @@ pub fn ensure_first_admin(conn: &mut PgConnection) -> Result<(), AppError> {
 //admin password reset
 pub fn reset_password(conn: &mut PgConnection, id_empleado: i32, new_password: &str) -> Result<(), AppError> {
     if new_password.len() < 8 {
-        Err(AppError::Validation("Contraseña muy corta".into()));
+        return Err(AppError::Validation("Contraseña muy corta".into()));
     }
 
     let hash = hash_password(new_password)?;
 
     empleado_repo::set_password(conn, id_empleado, &hash)?;
 
-    ok(())
+    Ok(())
 }
 
 
@@ -110,3 +111,4 @@ mod tests {
         assert!(!verify_password("secret123", "not-a-real-hash"));
     }
 }
+
