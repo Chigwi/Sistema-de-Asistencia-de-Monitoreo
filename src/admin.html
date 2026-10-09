@@ -15,7 +15,19 @@
         <button onclick="logout()">Cerrar sesion</button>
     </header>
     <div class="content">
-        <button id="btnDescanso" onclick="toggleDescanso()">Tomar descanso</button>
+        <table class="list" id="empleados">
+            <tr class="empleado">
+                <td class="nombre">
+                    <label>Nombre</label>
+                </td>
+                <td class="estado">
+                    <label>Conectado...</label>
+                </td>
+                <td class="detalles">
+                    <button>Ver detalles</button>
+                </td>
+            </tr>
+        </table>
     </div>
     <script src="main.js"></script> 
 </body>

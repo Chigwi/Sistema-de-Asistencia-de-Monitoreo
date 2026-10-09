@@ -38,14 +38,38 @@ header button:hover{
     border-color: aliceblue;
     background: rgb(133, 36, 85);
 }
+
 .content{
-    flex: 1;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
+    background:rgb(161, 143, 152);
+    width: 90%;
+    height: 80%;
+    overflow: auto;
+    position: absolute;
+    top: 10%;
+    transform-origin: 0% 0%;
+    transition: all 0.3s;
+    border-radius: 8px;
+    padding: 10px;
 }
 
-.content button{
+.list{
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: 0px 2px;
+}
+
+.list tr{
+    padding: 10px;
+    background: #406140;
+    text-align: center;
+    text-indent: 0% 50%;
+}
+
+.list tr label{
+    color: aliceblue;
+}
+
+.list tr button{
     font-family: "Cascadia Mono", sans-serif;
     padding: 10px 20px;
     color: aliceblue;
@@ -56,7 +80,7 @@ header button:hover{
     cursor: pointer;
     transition: 0.3s;
 }
-.content button:hover{
+.list tr button:hover{
     background: #93B693;
     color: #131114;
     font-weight: bold;
