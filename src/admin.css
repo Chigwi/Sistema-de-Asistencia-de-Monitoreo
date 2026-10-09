@@ -41,11 +41,12 @@ header button:hover{
 
 .content{
     background:rgb(161, 143, 152);
-    width: 90%;
+    width: calc(100% - 40px);
     height: 80%;
     overflow: auto;
     position: absolute;
     top: 10%;
+    /*margin-left: 50px;*/
     transform-origin: 0% 0%;
     transition: all 0.3s;
     border-radius: 8px;
