@@ -82,8 +82,22 @@ pub fn ensure_first_admin(conn: &mut PgConnection) -> Result<(), AppError> {
     Ok(())
 }
 
+//admin password reset
+pub fn reset_password(conn: &mut PgConnection, id_empleado: i32, new_password: &str) -> Result<(), AppError> {
+    if new_password.len() < 8 {
+        Err(AppError::Validation("Contraseña muy corta".into()));
+    }
+
+    let hash = hash_password(new_password)?;
+
+    empleado_repo::set_password(conn, id_empleado, &hash)?;
+
+    ok(())
+}
 
 
+
+//tests
 #[cfg(test)]
 mod tests {
     use super::*;

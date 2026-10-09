@@ -69,4 +69,10 @@ pub fn count_all(conn: &mut PgConnection) -> QueryResult<i64> {
     empleado::table.count().get_result(conn)
 }
 
+//change password
+pub fn set_password(conn: &mut PgConnection, id: i32, hash: &str) -> QueryResult<usize>{
+    diesel::update(empleado::table.find(id))
+        .set(empleado::contrasenna.eq(hash))
+        .execute(conn)
+}
 
