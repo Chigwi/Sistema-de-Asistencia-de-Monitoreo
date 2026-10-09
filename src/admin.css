@@ -102,9 +102,15 @@ footer{
 footer select{
     margin: 20px;
     border-radius: 8px;
+    border: none;
     background-color: #131114;
     color: aliceblue;
     cursor: pointer;
+}
+
+footer select option{
+    border: none;
+    border-radius: 8px;
 }
 
 footer button{
