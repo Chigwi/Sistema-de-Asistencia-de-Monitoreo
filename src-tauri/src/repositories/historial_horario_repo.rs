@@ -48,7 +48,6 @@ pub fn find_logged_in (conn: &mut PgConnection) -> QueryResult<Vec<EmpleadoActiv
 }
 
 
-
 //find logged out employees last shift
 pub fn find_logged_out(conn: &mut PgConnection) -> QueryResult<Vec<EmpleadoInactivo>>{
     let latest: Vec<EmpleadoInactivo> = historial_horario::table
