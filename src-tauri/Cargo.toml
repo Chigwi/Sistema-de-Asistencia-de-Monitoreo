@@ -32,6 +32,9 @@ chrono = { version = "0.4", features = ["serde"] }
 #errors
 thiserror = "2"
 
+#argon
+argon2 = { version = "0.5", features = ["std"] }
+
 # build libpq and openssl as part of the build process
 # uncomment these lines if you run into setup issues
 # pq-sys = { version = "0.6", features = ["bundled"] }

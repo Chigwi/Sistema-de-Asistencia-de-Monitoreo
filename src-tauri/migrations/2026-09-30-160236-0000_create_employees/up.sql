@@ -19,7 +19,7 @@ CREATE TABLE empleado (
                           id_empleado SERIAL PRIMARY KEY,
                           rol_empleado integer NOT NULL REFERENCES rol (id_rol),
                           nombre varchar(100) NOT NULL,
-                          cedula varchar(50) NOT NULL,
+                          cedula varchar(50) NOT NULL UNIQUE,
                           contrasenna varchar(255) NOT NULL,
                           horario_establecido integer REFERENCES horario (id_horario),
                           en_descanso boolean NOT NULL DEFAULT false
