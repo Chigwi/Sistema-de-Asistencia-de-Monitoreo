@@ -12,6 +12,7 @@ header{
     height: 50px;
     background: rgb(161, 143, 152);
     border-bottom-left-radius: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border-bottom-right-radius: 30px;
     display: flex;
     justify-content: space-between;
@@ -61,6 +62,7 @@ header button:hover{
 
 .list tr{
     padding: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     background: #406140;
     text-align: center;
     text-indent: 0% 50%;
@@ -82,6 +84,45 @@ header button:hover{
     transition: 0.3s;
 }
 .list tr button:hover{
+    background: #93B693;
+    color: #131114;
+    font-weight: bold;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer select{
+    margin: 20px;
+    border-radius: 8px;
+    background-color: #131114;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+footer button{
+    margin: 20px;
+    font-family: "Cascadia Mono", sans-serif;
+    font-size: 30px;
+    padding: 10px 20px;
+    color: aliceblue;
+    border-radius: 40px;
+    border: 1px solid #131114;
+    background: #131114;
+    margin: 10px; 
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+footer button:hover{
     background: #93B693;
     color: #131114;
     font-weight: bold;
