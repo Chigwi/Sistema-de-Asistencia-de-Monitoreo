@@ -29,7 +29,11 @@ function toggleDescanso(){
 }
 
 function logout(){
-  location.href = "login.html"
+  location.href = "login.html";
+}
+
+function crearEmpleado(){
+  location.href = "signup.html";
 }
 
 async function greet() {
