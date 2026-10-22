@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="Samuel Arce">
     <meta name="description" content="Pagina de autenticacion para Sistema de Asistencia de monitoreo.">
-    <title>Inicio de sesion</title>
+    <title>Acerca de...</title>
     <link rel="icon" href="sam.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,25 @@
     <link rel="stylesheet" href="details.css" type="text/css">
 </head>
 <body>
-    
+   <div class="information">
+        <button id="return" onclick="goBack()"><-</button>
+        <img src="sam.svg" alt="">
+        <label for="nombre">Lorem Ipsun</label>
+   </div> 
+   <div class="historial">
+        <table class="data">
+            <tr class="horario">
+                <td class="lastClockin">
+                    <label>8:22</label>
+                </td>
+                <td class="lastClockout">
+                    <label>18:14</label>
+                </td>
+                <td class="jornada">
+                    <label>8:00 - 17:00</label>
+                </td>
+            </tr>
+        </table>
+   </div>
 </body>
 </html>
