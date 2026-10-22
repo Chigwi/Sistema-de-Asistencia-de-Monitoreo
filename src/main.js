@@ -8,10 +8,12 @@ function login(){
     const username = document.getElementById("in_cedula").value;
     const password = document.getElementById("in_contrasenna").value;
 
-    if (username.length > 0){
+    if (username == "employer"){
         location.href = "empleado.html"; 
+    }else if (username == "admin"){
+        location.href = "admin.html";
     }else{
-        console.log("ingresa un username para la prueba");
+      console.log("ingresa un username para la prueba");
     }
 }
 
@@ -24,6 +26,10 @@ function toggleDescanso(){
     document.getElementById("btnDescanso").textContent = "Tomar descanso"
 
   }
+}
+
+function logout(){
+  location.href = "login.html"
 }
 
 async function greet() {
