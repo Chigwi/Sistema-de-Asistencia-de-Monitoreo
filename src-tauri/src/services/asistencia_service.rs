@@ -3,7 +3,7 @@ use chrono::{Local, NaiveDate, NaiveTime};
 use diesel::prelude::*;
 
 use crate::error::AppError;
-use crate::models::dtos::{EmpleadoActivo, EmpleadoInactivo};
+use crate::models::dtos::{EmpleadoActivo, EmpleadoInactivo, EstadoActual};
 use crate::models::historial_descanso::{HistorialDescanso, StartBreak};
 use crate::models::historial_horario::{ClockIn, ClockOut, HistorialHorario};
 use crate::repositories::{
@@ -13,6 +13,14 @@ use crate::repositories::{
 // whole minutes between two times of day (never negative)
 fn minutes_between(start: NaiveTime, end: NaiveTime) -> i32 {
     (end - start).num_minutes().max(0) as i32
+}
+
+// total minutes of the breaks that have already ended
+fn finished_break_minutes(breaks: &[HistorialDescanso]) -> i32 {
+    breaks
+        .iter()
+        .filter_map(|b| b.hora_salida.map(|end| minutes_between(b.hora_inicio, end)))
+        .sum()
 }
 
 pub fn clock_in(conn: &mut PgConnection, id_empleado: i32) -> Result<HistorialHorario, AppError> {
@@ -99,10 +107,8 @@ pub fn clock_out(conn: &mut PgConnection, id_empleado: i32) -> Result<HistorialH
 
         // total minutes spent on (finished) breaks during this shift
         let breaks = historial_descanso_repo::find_breaks_by_shift(conn, shift.id_historial_empleado)?;
-        let break_total: i32 = breaks
-            .iter()
-            .filter_map(|b| b.hora_salida.map(|end| minutes_between(b.hora_inicio, end)))
-            .sum();
+        
+        let break_total = finished_break_minutes(&breaks);
 
         // free break allowance from the employee's schedule
         let allowance = match emp.horario_establecido {
@@ -150,4 +156,38 @@ pub fn logged_in_list(conn: &mut PgConnection) -> Result<Vec<EmpleadoActivo>, Ap
 
 pub fn logged_out_list(conn: &mut PgConnection) -> Result<Vec<EmpleadoInactivo>, AppError> {
     Ok(historial_repo::find_logged_out(conn)?)
+}
+
+
+pub fn current_status(conn: &mut PgConnection, id_empleado: i32) -> Result<EstadoActual, AppError> {
+    let emp = empleado_repo::find_by_id(conn, id_empleado)?
+        .ok_or(AppError::NotFound("Empleado".into()))?;
+
+    let allowance = match emp.horario_establecido {
+        Some(id) => horario_repo::find_by_id(conn, id)?
+            .map(|h| h.tiempo_descanso)
+            .unwrap_or(0),
+        None => 0,
+    };
+
+    let Some(shift) = historial_repo::find_open_shift(conn, id_empleado)? else {
+        return Ok(EstadoActual {
+            turno_abierto: false,
+            en_descanso: false,
+            descanso_inicio: None,
+            descanso_usado: 0,
+            descanso_permitido: allowance,
+        });
+    };
+
+    let breaks = historial_descanso_repo::find_breaks_by_shift(conn, shift.id_historial_empleado)?;
+    let running = breaks.iter().find(|b| b.hora_salida.is_none());
+
+    Ok(EstadoActual {
+        turno_abierto: true,
+        en_descanso: running.is_some(),
+        descanso_inicio: running.map(|b| b.hora_inicio),
+        descanso_usado: finished_break_minutes(&breaks),
+        descanso_permitido: allowance,
+    })
 }

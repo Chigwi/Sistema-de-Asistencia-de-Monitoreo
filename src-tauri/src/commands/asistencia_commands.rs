@@ -3,7 +3,7 @@ use tauri::State;
 
 use crate::db::{run_db, DbPool};
 use crate::error::AppError;
-use crate::models::dtos::{EmpleadoActivo, EmpleadoInactivo};
+use crate::models::dtos::{EmpleadoActivo, EmpleadoInactivo, EstadoActual};
 use crate::models::historial_descanso::HistorialDescanso;
 use crate::models::historial_horario::HistorialHorario;
 use crate::services::asistencia_service;
@@ -84,4 +84,13 @@ pub async fn logged_out_list(
 ) -> Result<Vec<EmpleadoInactivo>, AppError> {
     require_admin(&state)?;
     run_db(pool.inner(), asistencia_service::logged_out_list).await
+}
+
+#[tauri::command]
+pub async fn current_status(
+    pool: State<'_, DbPool>,
+    state: State<'_, SessionState>,
+) -> Result<EstadoActual, AppError> {
+    let id = require_login(&state)?.id_empleado;
+    run_db(pool.inner(), move |conn| asistencia_service::current_status(conn, id)).await
 }

@@ -16,3 +16,12 @@ pub struct EmpleadoInactivo {
     pub hora_inicio: NaiveTime,
     pub hora_salida: Option<NaiveTime>,
 }
+
+#[derive(Serialize)]
+pub struct EstadoActual {
+    pub turno_abierto: bool,
+    pub en_descanso: bool,
+    pub descanso_inicio: Option<NaiveTime>,  // when the running break started
+    pub descanso_usado: i32,                 // minutes on finished breaks
+    pub descanso_permitido: i32,             // the schedule's allowance
+}
