@@ -45,7 +45,7 @@ header button:hover{
     align-items: center;
 }
 
-.content button{
+button{
     font-family: "Cascadia Mono", sans-serif;
     padding: 10px 20px;
     color: aliceblue;
@@ -56,11 +56,20 @@ header button:hover{
     cursor: pointer;
     transition: 0.3s;
 }
-.content button:hover{
+button:hover{
     background: #93B693;
     color: #131114;
     font-weight: bold;
 }
 
-#modalHistorial { max-width: 90vw; }
-.modal-scroll { max-height: 50vh; overflow-y: auto; }
+#modalHistorial { 
+    max-width: 90vw; 
+    border-radius: 8px;
+    background:rgb(161, 143, 152);
+    color: #131114;
+}
+.modal-scroll { 
+    max-height: 50vh; 
+    overflow-y: auto; 
+
+}
