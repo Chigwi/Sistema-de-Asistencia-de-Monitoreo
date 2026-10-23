@@ -5,6 +5,7 @@ let greetMsgEl;
 
 let session;
 function login(){
+  //inicia sesion con las credenciales y envia a una pantalla dependiendo de su roll
     const username = document.getElementById("in_cedula").value;
     const password = document.getElementById("in_contrasenna").value;
 
@@ -18,6 +19,7 @@ function login(){
 }
 
 function toggleDescanso(){
+  //Inicia o cancela descanso
   if(getComputedStyle(document.body).backgroundColor === "rgb(97, 64, 81)"){
     document.body.style.backgroundColor = "rgb(64, 97, 64)"; 
     document.getElementById("btnDescanso").textContent = "Retomar trabajo"
@@ -28,7 +30,14 @@ function toggleDescanso(){
   }
 }
 
+function resetTabla(tableID){
+  var tablaRef = document.getElementById(tableID);
+
+  tablaRef.innerHTML = "";
+}
+
 function addEmpleado(tableID, nombre, estado){
+  //Inserta los empleados dentro de la pantalla del empleado
   //consigue la tabla de empleado
     var tableRef = document.getElementById(tableID);
   //
@@ -58,10 +67,12 @@ function addEmpleado(tableID, nombre, estado){
 }
 
 function logout(){
+  //Cierra sesion
   location.href = "login.html";
 }
 
 function crearEmpleado(){
+  //Envia a la pantalla de crear empleado
   location.href = "signup.html";
 }
 
