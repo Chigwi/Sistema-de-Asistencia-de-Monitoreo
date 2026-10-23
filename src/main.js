@@ -228,8 +228,8 @@ function minutosTexto(m) {
 function abrirHistorial() {
   document.getElementById("modalHistorial").showModal();
   cargarHistorial();
+  cargarMiDescanso();   // new
 }
-
 async function cargarHistorial() {
   const dias = Number(document.getElementById("hist_rango").value);
   const hoy = new Date();
@@ -360,3 +360,30 @@ async function descansoEmpleado(id, nombre) {
 function cerrarDescanso() {
   document.getElementById("modalDescanso").close();
 }
+
+async function cargarMiDescanso() {
+  try {
+    const s = await invoke("current_status");
+
+    // finished breaks, plus the one running right now
+    let usado = s.descanso_usado;
+    if (s.en_descanso && s.descanso_inicio) usado += minutosDesde(s.descanso_inicio);
+    const diferencia = s.descanso_permitido - usado;
+
+    let estado;
+    if (!s.turno_abierto) estado = "Sin turno abierto";
+    else if (s.en_descanso) estado = "En descanso desde " + s.descanso_inicio.slice(0, 5);
+    else estado = "Trabajando";
+
+    document.getElementById("mi_estado").textContent = estado;
+    document.getElementById("mi_usado").textContent = minutosTexto(usado);
+    document.getElementById("mi_permitido").textContent = minutosTexto(s.descanso_permitido);
+    document.getElementById("mi_balance").textContent =
+      diferencia >= 0
+        ? minutosTexto(diferencia) + " restantes"
+        : minutosTexto(-diferencia) + " de exceso";
+  } catch (err) {
+    alert(err);
+  }
+}
+

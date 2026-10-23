@@ -24,6 +24,11 @@
         <h2>Mis turnos</h2>
         <button onclick="cerrarHistorial()">Cerrar</button>
     </div>
+    <div id="infoDescanso">
+        <p><strong>Estado:</strong> <span id="mi_estado"></span></p>
+        <p><strong>Descanso usado:</strong> <span id="mi_usado"></span> de <span id="mi_permitido"></span></p>
+        <p><strong>Balance:</strong> <span id="mi_balance"></span></p>
+    </div>
     <div class="modal-filtros">
         <label>Rango
             <select id="hist_rango" onchange="cargarHistorial()">
