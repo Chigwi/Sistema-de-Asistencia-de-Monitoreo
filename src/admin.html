@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="empleado"></title>
+    <link rel="icon" href="sam.svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@600&family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <label for="user">lorem ipsun</label>
+        <button onclick="logout()">Cerrar sesion</button>
+    </header>
+    <div class="content">
+        <table class="list" id="empleados">
+            <tr class="empleado">
+                <td class="nombre">
+                    <label>Nombre</label>
+                </td>
+                <td class="estado">
+                    <label>Conectado...</label>
+                </td>
+                <td class="detalles">
+                    <button class="ver_detalles" onclick="detallesEmpleado()">Ver detalles</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <footer>
+        <select id="filtrar_empleado" placeholder="Ordenar por...">
+            <option value="conectado">Conectado</option>
+            <option value="ultima_coneccion">Ultima coneccion</option>
+            <option value="nombre">Nombre</option>
+            <option value="jornada">Jornada</option>
+        </select>
+        <button id="new_user" onclick="crearEmpleado()">+</button>
+    </footer>
+    <script src="main.js"></script> 
+</body>
+</html>

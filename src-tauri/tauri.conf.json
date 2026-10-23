@@ -11,6 +11,7 @@
     "windows": [
       {
         "title": "s_a_m",
+        "url": "login.html",
         "width": 800,
         "height": 600
       }

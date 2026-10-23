@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Samuel Arce">
+    <meta name="description" content="Pagina de autenticacion para Sistema de Asistencia de monitoreo.">
+    <title>Crea un nuevo empleado</title>
+    <link rel="icon" href="sam.svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@600&family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css" type="text/css">
+</head>
+<body>
+    <div class="login-box">
+        <h1 id="Titulo">Crea un nuevo empleado/a!</h1> 
+        <input id="in_nombre" type="text" placeholder="Nombre completo" required>
+        <input id="in_cedula" type="text" placeholder="Cedula" required>
+        <input id="in_contrasenna" type="password" placeholder="Contraseña" required>
+        <input id="in_contrasenna_again" type="password" placeholder="Contraseña nuevamente" required>
+        <select id="rol">
+            <option value="empleado">Empleado</option>
+            <option value="admin">Administrador</option>
+        </select>
+        <Select id="jornada">
+            <option value="1">Diurna</option>
+            <option value="2">Nocturna</option>
+        </Select>
+        <button onclick="login()">Crear cuenta</button>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

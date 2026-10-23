@@ -1,0 +1,58 @@
+body {
+    font-family: "Bitcount Single", system-ui;
+    background: rgb(97, 64, 81);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-box {
+    background: rgb(161, 143, 152);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+}
+.login-box h1{
+    margin-bottom: 20px;
+    color: #e1e1e1;
+    font-weight: 500;
+}
+.login-box input{
+    font-family: "Cascadia Mono", sans-serif;
+    width: 90%;
+    padding: 20px;
+    border: 1px solid #e1d7e4;
+    border-radius: 10px;
+    outline: none;
+    margin: 10px;
+}
+.login-box button{
+    font-family: "Cascadia Mono", sans-serif;
+    margin-top: 20px;
+    width: 90%;
+    padding: 30;
+    background: #131114;
+    color: #e1d7e4;
+    border: 1px solid #131114;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14;
+    transition: 0.3s;
+}
+
+.login-box button:hover{
+    background: #93B693;
+    color: #131114;
+    font-weight: bold;
+}
+
+select {
+    margin: 0;
+    border-radius: 8px;
+    border: none;
+    background-color: #131114;
+    color: aliceblue;
+    cursor: pointer;
+}

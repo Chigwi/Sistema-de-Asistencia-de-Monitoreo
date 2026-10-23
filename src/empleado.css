@@ -1,0 +1,63 @@
+body {
+    font-family: "Cascadia Mono", sans-serif;
+    background: rgb(97, 64, 81);
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+header{
+    width: 100%; 
+    height: 50px;
+    background: rgb(161, 143, 152);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header label{
+    font-family: "Cascadia Mono", sans-serif;
+    padding: 30px;
+    padding-top: 30px;
+    margin: 10px;
+}
+header button{
+    font-family: "Cascadia Mono", sans-serif;
+    padding: 5px;
+    color: aliceblue;
+    border-radius: 8px;
+    border: 1px solid #131114;
+    background: #131114;
+    margin: 10px; 
+    cursor: pointer;
+    transition: 0.3s;
+}
+header button:hover{
+    border-color: aliceblue;
+    background: rgb(133, 36, 85);
+}
+.content{
+    flex: 1;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.content button{
+    font-family: "Cascadia Mono", sans-serif;
+    padding: 10px 20px;
+    color: aliceblue;
+    border-radius: 8px;
+    border: 1px solid #131114;
+    background: #131114;
+    margin: 10px; 
+    cursor: pointer;
+    transition: 0.3s;
+}
+.content button:hover{
+    background: #93B693;
+    color: #131114;
+    font-weight: bold;
+}
