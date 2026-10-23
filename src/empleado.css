@@ -75,6 +75,13 @@ button:hover{
 
 }
 
+#tablaHistorial {
+    border-color: #131114;
+    border-collapse: separate;
+    table-layout: auto;
+    width: 100%;
+}
+
 select {
     margin: 5px;
     border-radius: 8px;
