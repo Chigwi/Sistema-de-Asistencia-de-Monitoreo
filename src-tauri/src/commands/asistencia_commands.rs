@@ -104,3 +104,13 @@ pub async fn on_break_list(
     require_admin(&state)?;
     run_db(pool.inner(), asistencia_service::on_break_list).await
 }
+
+#[tauri::command]
+pub async fn employee_status(
+    pool: State<'_, DbPool>,
+    state: State<'_, SessionState>,
+    id_empleado: i32,
+) -> Result<EstadoActual, AppError> {
+    require_admin(&state)?;
+    run_db(pool.inner(), move |conn| asistencia_service::current_status(conn, id_empleado)).await
+}

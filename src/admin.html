@@ -35,6 +35,18 @@
     <p><strong>Jornada:</strong> <span id="det_jornada"></span></p>
     <button onclick="cerrarDetalles()">Cerrar</button>
     </dialog>
+    <dialog id="modalDescanso">
+    <h2>Horario: <span id="desc_nombre"></span></h2>
+    <p><strong>Estado:</strong> <span id="desc_estado"></span></p>
+    <p><strong>Descanso usado:</strong> <span id="desc_usado"></span></p>
+    <p><strong>Descanso permitido:</strong> <span id="desc_permitido"></span></p>
+    <p><strong>Balance:</strong> <span id="desc_balance"></span></p>
+    <h3>Turnos recientes</h3>
+    <div class="modal-scroll">
+        <table id="tablaDescansoHist"></table>
+    </div>
+    <button onclick="cerrarDescanso()">Cerrar</button>
+    </dialog>
     <script src="main.js"></script> 
 </body>
 </html>

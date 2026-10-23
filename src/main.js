@@ -65,15 +65,24 @@ function addEmpleado(tableID, nombre, estado, id){
 
     var botonVerDetalles = document.createElement("button");
 
+    var botonDescanso = document.createElement("button");
+
     botonVerDetalles.innerHTML = "Ver Detalles";
     botonVerDetalles.setAttribute("class", "ver_detalles");
     botonVerDetalles.addEventListener("click", () => detallesEmpleado(id));
+
+
+    botonDescanso.innerHTML = "Ver Horario";
+    botonDescanso.setAttribute("class", "ver_descanso");
+    botonDescanso.addEventListener("click", () => descansoEmpleado(id, nombre));
 
     nombreEmpleado.appendChild(nombreTexto);
 
     estadoEmpleado.appendChild(estadoTexto);
 
     botonDetalles.appendChild(botonVerDetalles);
+
+    botonDetalles.appendChild(botonDescanso);
 }
 
 async function logout() {
@@ -297,4 +306,57 @@ async function detallesEmpleado(id) {
 
 function cerrarDetalles() {
   document.getElementById("modalDetalles").close();
+}
+
+
+// minutes elapsed since a "HH:MM:SS" time of today
+function minutosDesde(horaTexto) {
+  const [h, m, s] = horaTexto.split(":").map(Number);
+  const ahora = new Date();
+  const ahoraSeg = ahora.getHours() * 3600 + ahora.getMinutes() * 60 + ahora.getSeconds();
+  return Math.max(0, Math.floor((ahoraSeg - (h * 3600 + m * 60 + (s || 0))) / 60));
+}
+
+async function descansoEmpleado(id, nombre) {
+  try {
+    const s = await invoke("employee_status", { idEmpleado: id });
+
+    // finished breaks, plus the one running right now
+    let usado = s.descanso_usado;
+    if (s.en_descanso && s.descanso_inicio) usado += minutosDesde(s.descanso_inicio);
+    const diferencia = s.descanso_permitido - usado;
+
+    let estado;
+    if (!s.turno_abierto) estado = "Sin turno abierto";
+    else if (s.en_descanso) estado = "En descanso desde " + s.descanso_inicio.slice(0, 5);
+    else estado = "Trabajando";
+
+    document.getElementById("desc_nombre").textContent = nombre;
+    document.getElementById("desc_estado").textContent = estado;
+    document.getElementById("desc_usado").textContent = minutosTexto(usado);
+    document.getElementById("desc_permitido").textContent = minutosTexto(s.descanso_permitido);
+    document.getElementById("desc_balance").textContent =
+      diferencia >= 0
+        ? minutosTexto(diferencia) + " restantes"
+        : minutosTexto(-diferencia) + " de exceso";
+
+    // break minutes of the last 30 days of finished shifts
+    const hoy = new Date();
+    const desde = new Date();
+    desde.setDate(hoy.getDate() - 30);
+    const turnos = await invoke("employee_history", {
+      idEmpleado: id,
+      from: fechaLocal(desde),
+      to: fechaLocal(hoy),
+    });
+    mostrarTurnos("tablaDescansoHist", turnos.filter(t => t.hora_salida !== null));
+
+    document.getElementById("modalDescanso").showModal();
+  } catch (err) {
+    alert(err);
+  }
+}
+
+function cerrarDescanso() {
+  document.getElementById("modalDescanso").close();
 }
