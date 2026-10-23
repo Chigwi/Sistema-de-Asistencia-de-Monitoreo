@@ -76,6 +76,7 @@ pub fn run() {
             commands::asistencia_commands::logged_out_list,
             commands::empleado_commands::register_employee,
             commands::empleado_commands::list_employees,
+            commands::asistencia_commands::on_break_list,
             commands::empleado_commands::reset_employee_password,
         ])
         .run(tauri::generate_context!())

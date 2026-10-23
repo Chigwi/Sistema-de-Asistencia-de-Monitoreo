@@ -173,6 +173,15 @@ async function cargarEmpleados() {
         nombre: e.nombre,
         estado: jornadaTexto(e.horario_establecido),
       }));
+    } else if (filtro === "descanso") {
+      const lista = await invoke("on_break_list");
+      const empleados = lista
+        .filter(e => e.rol_empleado === 2)
+        .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+      filas = empleados.map(e => ({
+        nombre: e.nombre,
+        estado: "En descanso",
+      }));
     }
 
     resetTabla("empleados");

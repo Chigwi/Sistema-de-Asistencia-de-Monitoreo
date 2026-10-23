@@ -3,6 +3,7 @@ use chrono::{Local, NaiveDate, NaiveTime};
 use diesel::prelude::*;
 
 use crate::error::AppError;
+use crate::models::empleado::Empleado;
 use crate::models::dtos::{EmpleadoActivo, EmpleadoInactivo, EstadoActual};
 use crate::models::historial_descanso::{HistorialDescanso, StartBreak};
 use crate::models::historial_horario::{ClockIn, ClockOut, HistorialHorario};
@@ -190,4 +191,9 @@ pub fn current_status(conn: &mut PgConnection, id_empleado: i32) -> Result<Estad
         descanso_usado: finished_break_minutes(&breaks),
         descanso_permitido: allowance,
     })
+    
+}
+
+pub fn on_break_list(conn: &mut PgConnection) -> Result<Vec<Empleado>, AppError> {
+    Ok(empleado_repo::find_on_break(conn)?)
 }
