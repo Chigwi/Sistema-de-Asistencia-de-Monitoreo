@@ -163,6 +163,8 @@ button:hover{
 
 
 h2{
-    background: rgb(133, 36, 85);
+    background: rgb(97, 64, 81);;
+    background-size: calc(min-width + 10px);
     border-radius: 8px;
+    padding: 2px;
 }
