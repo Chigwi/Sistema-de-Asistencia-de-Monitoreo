@@ -47,3 +47,10 @@ CREATE TABLE historial_descanso(
                                  hora_inicio TIME NOT NULL,
                                  hora_salida TIME
 );
+
+
+CREATE UNIQUE INDEX one_open_shift_per_employee
+    ON historial_horario (empleado) WHERE hora_salida IS NULL;
+
+CREATE UNIQUE INDEX one_open_break_per_shift
+    ON historial_descanso (historial_horario) WHERE hora_salida IS NULL;

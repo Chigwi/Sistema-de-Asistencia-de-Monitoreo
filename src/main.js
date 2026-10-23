@@ -1,36 +1,46 @@
 const { invoke } = window.__TAURI__.core;
 
-let greetInputEl;
-let greetMsgEl;
 
-let session;
-function login(){
-  //inicia sesion con las credenciales y envia a una pantalla dependiendo de su roll
-    const username = document.getElementById("in_cedula").value;
-    const password = document.getElementById("in_contrasenna").value;
+async function login() {
+  const cedula = document.getElementById("in_cedula").value.trim();
+  const password = document.getElementById("in_contrasenna").value;
 
-    if (username == "employer"){
-        location.href = "empleado.html"; 
-    }else if (username == "admin"){
-        location.href = "admin.html";
-    }else{
-      console.log("ingresa un username para la prueba");
+  try {
+    const session = await invoke("login", { cedula, password });
+    sessionStorage.setItem("session", JSON.stringify(session));
+
+    if (session.rol === "Admin") {
+      location.href = "admin.html";
+    } else {
+      location.href = "empleado.html";
     }
+  } catch (err) {
+    console.log(err);
+    alert(err);
+  }
 }
 
-function toggleDescanso(){
-  //Inicia o cancela descanso
-  if(getComputedStyle(document.body).backgroundColor === "rgb(97, 64, 81)"){
-    document.body.style.backgroundColor = "rgb(64, 97, 64)"; 
-    document.getElementById("btnDescanso").textContent = "Retomar trabajo"
-  }else{
-    document.body.style.backgroundColor = "rgb(97, 64, 81)";
-    document.getElementById("btnDescanso").textContent = "Tomar descanso"
+async function toggleDescanso() {
+  // pink = working, so pressing the button starts a break (same colors as before)
+  const iniciaDescanso = getComputedStyle(document.body).backgroundColor === "rgb(97, 64, 81)";
 
+  try {
+    await invoke(iniciaDescanso ? "start_break" : "end_break");
+
+    if (iniciaDescanso) {
+      document.body.style.backgroundColor = "rgb(64, 97, 64)";
+      document.getElementById("btnDescanso").textContent = "Retomar trabajo";
+    } else {
+      document.body.style.backgroundColor = "rgb(97, 64, 81)";
+      document.getElementById("btnDescanso").textContent = "Tomar descanso";
+    }
+  } catch (err) {
+    alert(err);
   }
 }
 
 function resetTabla(tableID){
+  //limpia el contenido de la tabla que le envies 
   var tablaRef = document.getElementById(tableID);
 
   tablaRef.innerHTML = "";
@@ -66,9 +76,13 @@ function addEmpleado(tableID, nombre, estado){
     botonDetalles.appendChild(botonVerDetalles);
 }
 
-function logout(){
-  //Cierra sesion
-  location.href = "login.html";
+async function logout() {
+  try {
+    await invoke("logout");
+  } finally {
+    sessionStorage.removeItem("session");
+    location.href = "login.html";
+  }
 }
 
 function crearEmpleado(){
@@ -76,16 +90,4 @@ function crearEmpleado(){
   location.href = "signup.html";
 }
 
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
-}
 
-window.addEventListener("DOMContentLoaded", () => {
-  greetInputEl = document.querySelector("#greet-input");
-  greetMsgEl = document.querySelector("#greet-msg");
-  document.querySelector("#greet-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    greet();
-  });
-});

@@ -68,7 +68,7 @@ pub fn ensure_first_admin(conn: &mut PgConnection) -> Result<(), AppError> {
     let password = std::env::var("ADMIN_PASSWORD")
         .map_err(|_| AppError::Internal("ADMIN_PASSWORD is not set".into()))?;
 
-    let rol = rol_repo::find_by_name(conn, "admin")?
+    let rol = rol_repo::find_by_name(conn, "Admin")?
         .ok_or(AppError::Internal("Role 'Admin' is not seeded".into()))?;
 
     let new = NewEmpleado {

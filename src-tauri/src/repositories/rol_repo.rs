@@ -29,7 +29,8 @@ pub fn find_by_name(conn: &mut PgConnection, name: &str) -> QueryResult<Option<R
     rol::table
         .filter(rol::nombre_rol.eq(name))
         .select(Rol::as_select())
-        .first(conn).optional()
+        .first(conn)
+        .optional()
 }
 
 //delete by id
