@@ -160,3 +160,9 @@ button:hover{
     color: #131114;
     font-weight: bold;
 }
+
+
+h2{
+    background: rgb(133, 36, 85);
+    border-radius: 8px;
+}
