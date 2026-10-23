@@ -91,4 +91,32 @@ function crearEmpleado(){
   location.href = "signup.html";
 }
 
+//crea un nuevo usuario
+async function crearCuenta() {
+  const nombre = document.getElementById("in_nombre").value.trim();
+  const cedula = document.getElementById("in_cedula").value.trim();
+  const contrasena = document.getElementById("in_contrasenna").value;
+  const confirmar = document.getElementById("in_contrasenna_again").value;
+
+  if (contrasena !== confirmar) {
+    alert("Las contraseñas no coinciden");
+    return;
+  }
+
+  try {
+    await invoke("register_employee", {
+      data: {
+        rol_empleado: Number(document.getElementById("rol").value),
+        nombre,
+        cedula,
+        contrasenna: contrasena,
+        horario_establecido: Number(document.getElementById("jornada").value),
+      },
+    });
+    alert("Empleado creado");
+    location.href = "admin.html";
+  } catch (err) {
+    alert(err);
+  }
+}
 
