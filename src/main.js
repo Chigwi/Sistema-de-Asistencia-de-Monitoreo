@@ -28,6 +28,35 @@ function toggleDescanso(){
   }
 }
 
+function addEmpleado(tableID, nombre, estado){
+  //consigue la tabla de empleado
+    var tableRef = document.getElementById(tableID);
+  //
+    var newRow = tableRef.insertRow(0);
+
+    var nombreEmpleado = newRow.insertCell(0);
+
+    var estadoEmpleado = newRow.insertCell(1);
+
+    var botonDetalles = newRow.insertCell(2);
+
+    var nombreTexto = document.createTextNode(nombre);
+
+    var estadoTexto = document.createTextNode(estado);
+
+    var botonVerDetalles = document.createElement("button");
+
+    botonVerDetalles.innerHTML = "Ver Detalles";
+    botonVerDetalles.setAttribute("class", "ver_detalles");
+    botonVerDetalles.setAttribute("onclick", "detallesEmpleado()");
+
+    nombreEmpleado.appendChild(nombreTexto);
+
+    estadoEmpleado.appendChild(estadoTexto);
+
+    botonDetalles.appendChild(botonVerDetalles);
+}
+
 function logout(){
   location.href = "login.html";
 }
