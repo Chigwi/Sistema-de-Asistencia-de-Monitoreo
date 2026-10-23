@@ -77,9 +77,19 @@ button:hover{
 
 #tablaHistorial {
     border-color: #131114;
-    border-collapse: separate;
+    border-collapse: collapse;
     table-layout: auto;
     width: 100%;
+}
+
+th {
+    background-color: rgb(133, 36, 85);
+    border-radius: 8px;
+}
+
+tr {
+    border: 1px solid #131114;
+    border-radius: 8px;
 }
 
 select {
