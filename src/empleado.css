@@ -86,6 +86,7 @@ button:hover{
 }
 
 th {
+    border: 1px solid #131114;
     background-color: rgb(133, 36, 85);
     border-radius: 8px;
 }
@@ -93,7 +94,9 @@ th {
 tr {
     border: 1px solid #131114;
     border-radius: 8px;
+    background:rgb(135, 123, 129);
 }
+
 
 select {
     margin: 5px;
