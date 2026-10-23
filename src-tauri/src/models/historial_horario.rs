@@ -16,6 +16,7 @@ pub struct HistorialHorario{
     pub hora_inicio: NaiveTime,
     pub hora_salida: Option<NaiveTime>,
     pub minutos_trabajadas: Option<i32>,
+    pub minutos_descanso: Option<i32>,
     pub minutos_establecidas: i32,
     pub minutos_extras: Option<i32>,
     pub notas: Option<String>,
@@ -52,5 +53,6 @@ pub struct ClockIn{
 pub struct ClockOut{
     pub hora_salida: NaiveTime,
     pub minutos_trabajadas: i32,
+    pub minutos_descanso: i32,
     pub minutos_extras: i32,
 }

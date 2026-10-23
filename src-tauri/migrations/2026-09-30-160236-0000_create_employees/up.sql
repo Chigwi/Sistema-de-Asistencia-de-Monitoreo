@@ -35,6 +35,7 @@ CREATE TABLE historial_horario(
                                   hora_inicio TIME(0) NOT NULL,
                                   hora_salida TIME(0),
                                   minutos_trabajadas integer,
+                                  minutos_descanso integer,
                                   minutos_establecidas integer NOT NULL,
                                   minutos_extras integer,
                                   notas text,

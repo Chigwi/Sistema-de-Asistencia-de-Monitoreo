@@ -124,6 +124,7 @@ pub fn clock_out(conn: &mut PgConnection, id_empleado: i32) -> Result<HistorialH
             &ClockOut {
                 hora_salida: now,
                 minutos_trabajadas: worked,
+                minutos_descanso: break_total,
                 minutos_extras: extra,
             },
         )?;

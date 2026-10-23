@@ -31,6 +31,7 @@ diesel::table! {
         hora_inicio -> Time,
         hora_salida -> Nullable<Time>,
         minutos_trabajadas -> Nullable<Int4>,
+        minutos_descanso -> Nullable<Int4>,
         minutos_establecidas -> Int4,
         minutos_extras -> Nullable<Int4>,
         notas -> Nullable<Text>,
