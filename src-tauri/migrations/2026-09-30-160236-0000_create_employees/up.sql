@@ -14,6 +14,10 @@ CREATE TABLE horario(
                         minutos_establecidas integer NOT NULL
 );
 
+INSERT INTO horario (hora_inicio, hora_salida, tiempo_descanso, minutos_establecidas) VALUES
+    ('06:00', '14:00', 90, 480),
+    ('12:00', '20:00', 90, 480);
+
 
 CREATE TABLE empleado (
                           id_empleado SERIAL PRIMARY KEY,

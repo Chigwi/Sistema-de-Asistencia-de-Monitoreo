@@ -69,7 +69,7 @@ pub fn ensure_first_admin(conn: &mut PgConnection) -> Result<(), AppError> {
         .map_err(|_| AppError::Internal("ADMIN_PASSWORD is not set".into()))?;
 
     let rol = rol_repo::find_by_name(conn, "admin")?
-        .ok_or(AppError::Internal("Role 'admin' is not seeded".into()))?;
+        .ok_or(AppError::Internal("Role 'Admin' is not seeded".into()))?;
 
     let new = NewEmpleado {
         rol_empleado: rol.id_rol,

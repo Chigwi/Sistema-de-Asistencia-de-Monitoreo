@@ -1,13 +1,14 @@
+use serde::Serialize;
 use std::sync::Mutex;
 use crate::error::AppError;
 
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, PartialEq, Serialize)]
 pub enum Role {
     Admin,
     Empleado,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Serialize)]
 pub struct Session {
     pub id_empleado: i32,
     pub rol: Role,

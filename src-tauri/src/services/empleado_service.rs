@@ -12,7 +12,7 @@ pub fn register(conn: &mut PgConnection, data: RegisterEmpleado) -> Result<Emple
     if nombre.is_empty() || cedula.is_empty() {
         return Err(AppError::Validation("Nombre y cédula son obligatorios".into()));
     }
-    if data.contrasena.len() < 8 {
+    if data.contrasenna.len() < 8 {
         return Err(AppError::Validation("Contraseña muy corta".into()));
     }
     if empleado_repo::find_by_cedula(conn, &cedula)?.is_some() {
@@ -31,7 +31,7 @@ pub fn register(conn: &mut PgConnection, data: RegisterEmpleado) -> Result<Emple
         rol_empleado: data.rol_empleado,
         nombre,
         cedula,
-        contrasenna: auth_service::hash_password(&data.contrasena)?,
+        contrasenna: auth_service::hash_password(&data.contrasenna)?,
         horario_establecido: data.horario_establecido,
     };
     Ok(empleado_repo::insert(conn, &new)?)
