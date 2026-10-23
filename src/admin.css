@@ -164,7 +164,7 @@ button:hover{
 
 h2{
     background: rgb(97, 64, 81);;
-    background-size: calc(min-width + 10px);
+    background-size: inherit;
     border-radius: 8px;
     padding: 2px;
 }
