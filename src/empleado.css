@@ -61,3 +61,6 @@ header button:hover{
     color: #131114;
     font-weight: bold;
 }
+
+#modalHistorial { max-width: 90vw; }
+.modal-scroll { max-height: 50vh; overflow-y: auto; }

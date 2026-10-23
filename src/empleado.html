@@ -13,11 +13,30 @@
 <body>
     <header>
         <label id="nombre_usuario"></label>
+        <button onclick="abrirHistorial()">Mis turnos</button>
         <button onclick="logout()">Cerrar sesion</button>
     </header>
     <div class="content">
         <button id="btnDescanso" onclick="toggleDescanso()">Tomar descanso</button>
     </div>
+    <dialog id="modalHistorial">
+    <div class="modal-barra">
+        <h2>Mis turnos</h2>
+        <button onclick="cerrarHistorial()">Cerrar</button>
+    </div>
+    <div class="modal-filtros">
+        <label>Rango
+            <select id="hist_rango" onchange="cargarHistorial()">
+                <option value="7">Últimos 7 días</option>
+                <option value="30" selected>Últimos 30 días</option>
+                <option value="90">Últimos 90 días</option>
+            </select>
+        </label>
+    </div>
+    <div class="modal-scroll">
+        <table id="tablaHistorial"></table>
+    </div>
+    </dialog>
     <script src="main.js"></script> 
 </body>
 </html>

@@ -201,3 +201,74 @@ window.addEventListener("DOMContentLoaded", () => {
     cargarEmpleados();
   }
 });
+
+
+function fechaLocal(d) {
+  const mes = String(d.getMonth() + 1).padStart(2, "0");
+  const dia = String(d.getDate()).padStart(2, "0");
+  return d.getFullYear() + "-" + mes + "-" + dia;
+}
+
+function minutosTexto(m) {
+  if (m === null || m === undefined) return "-";
+  return Math.floor(m / 60) + "h " + (m % 60) + "m";
+}
+
+function abrirHistorial() {
+  document.getElementById("modalHistorial").showModal();
+  cargarHistorial();
+}
+
+async function cargarHistorial() {
+  const dias = Number(document.getElementById("hist_rango").value);
+  const hoy = new Date();
+  const desde = new Date();
+  desde.setDate(hoy.getDate() - dias);
+
+  try {
+    const turnos = await invoke("my_history", {
+      from: fechaLocal(desde),
+      to: fechaLocal(hoy),
+    });
+    mostrarTurnos("tablaHistorial", turnos.filter(t => t.hora_salida !== null));
+  } catch (err) {
+    alert(err);
+  }
+}
+
+function mostrarTurnos(tableID, turnos) {
+  const tabla = document.getElementById(tableID);
+  tabla.innerHTML = "";
+
+  const encabezado = tabla.insertRow();
+  ["Fecha", "Entrada", "Salida", "Trabajado", "Descanso", "Extra"].forEach(texto => {
+    const th = document.createElement("th");
+    th.textContent = texto;
+    encabezado.appendChild(th);
+  });
+
+  if (turnos.length === 0) {
+    const celda = tabla.insertRow().insertCell();
+    celda.colSpan = 6;
+    celda.textContent = "No hay turnos en este rango";
+    return;
+  }
+
+  turnos.forEach(t => {
+    const fila = tabla.insertRow();
+    [
+      t.fecha,
+      t.hora_inicio.slice(0, 5),
+      t.hora_salida.slice(0, 5),
+      minutosTexto(t.minutos_trabajadas),
+      minutosTexto(t.minutos_descanso),
+      minutosTexto(t.minutos_extras),
+    ].forEach(valor => {
+      fila.insertCell().textContent = valor;
+    });
+  });
+}
+
+function cerrarHistorial() {
+  document.getElementById("modalHistorial").close();
+}
