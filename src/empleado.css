@@ -67,9 +67,19 @@ button:hover{
     border-radius: 8px;
     background:rgb(161, 143, 152);
     color: #131114;
+    box-shadow: #131114;
 }
 .modal-scroll { 
     max-height: 50vh; 
     overflow-y: auto; 
 
+}
+
+select {
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+    background-color: #131114;
+    color: aliceblue;
+    cursor: pointer;
 }
