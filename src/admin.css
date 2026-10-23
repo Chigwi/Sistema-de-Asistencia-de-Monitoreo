@@ -134,7 +134,7 @@ footer button:hover{
     font-weight: bold;
 }
 
-#modalDetalles {
+dialog {
     min-width: 50%;
     max-width: 90%; 
     border-radius: 8px;
@@ -168,3 +168,25 @@ h2{
     border-radius: 8px;
     padding: 2px;
 }
+
+table {
+    border: 2px solid #131114;
+    border-radius: 8px;
+    border-color: #131114;
+    border-collapse: separate;
+    table-layout: auto;
+    width: 100%;
+}
+
+th {
+    border: 1px solid #131114;
+    background-color: rgb(133, 36, 85);
+    border-radius: 8px;
+}
+
+tr {
+    border: 1px solid #131114;
+    border-radius: 8px;
+    background:rgb(135, 123, 129);
+}
+
