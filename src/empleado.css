@@ -78,7 +78,7 @@ button:hover{
 
 #tablaHistorial {
     border-color: #131114;
-    border-collapse: collapse;
+    border-collapse: separate;
     table-layout: auto;
     width: 100%;
 }
