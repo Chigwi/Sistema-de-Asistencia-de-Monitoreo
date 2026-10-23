@@ -63,7 +63,8 @@ button:hover{
 }
 
 #modalHistorial { 
-    max-width: 90vw; 
+    min-width: 50%;
+    max-width: 90%; 
     border-radius: 8px;
     background:rgb(161, 143, 152);
     color: #131114;
