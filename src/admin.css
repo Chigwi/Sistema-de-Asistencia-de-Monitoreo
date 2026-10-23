@@ -133,3 +133,12 @@ footer button:hover{
     color: #131114;
     font-weight: bold;
 }
+
+#modalDetalles {
+    min-width: 50%;
+    max-width: 90%; 
+    border-radius: 8px;
+    background:rgb(161, 143, 152);
+    color: #131114;
+    box-shadow: #131114;
+}
