@@ -79,9 +79,10 @@ function addEmpleado(tableID, nombre, estado){
 async function logout() {
   try {
     await invoke("logout");
-  } finally {
     sessionStorage.removeItem("session");
     location.href = "login.html";
+  } catch (err) {
+    alert(err); // e.g. "Debe terminar el descanso antes de salir"
   }
 }
 
