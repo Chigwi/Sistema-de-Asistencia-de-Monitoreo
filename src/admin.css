@@ -142,3 +142,21 @@ footer button:hover{
     color: #131114;
     box-shadow: #131114;
 }
+
+button{
+    font-family: "Cascadia Mono", sans-serif;
+    padding: 5px;
+    color: aliceblue;
+    border-radius: 8px;
+    border: 1px solid #131114;
+    background: #131114;
+    margin: 10px; 
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover{
+    background: #93B693;
+    color: #131114;
+    font-weight: bold;
+}
