@@ -120,3 +120,17 @@ async function crearCuenta() {
   }
 }
 
+function mostrarNombre() {
+  const label = document.getElementById("nombre_usuario");
+  if (!label) return; // login.html and signup.html don't have this label
+
+  const session = JSON.parse(sessionStorage.getItem("session") || "null");
+  if (!session) {
+    location.href = "login.html"; // nobody logged in
+    return;
+  }
+  label.textContent = session.nombre;
+}
+
+window.addEventListener("DOMContentLoaded", mostrarNombre);
+

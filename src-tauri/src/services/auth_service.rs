@@ -55,7 +55,7 @@ pub fn login(conn: &mut PgConnection, cedula: &str, password: &str) -> Result<Se
         .ok_or(AppError::Internal("Employee role not found".into()))?;
     let rol = role_from_name(&emp_rol.nombre_rol)?;
 
-    Ok(Session { id_empleado: emp.id_empleado, rol })
+    Ok(Session { id_empleado: emp.id_empleado, nombre: emp.nombre, rol })
 }
 
 pub fn ensure_first_admin(conn: &mut PgConnection) -> Result<(), AppError> {

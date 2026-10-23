@@ -11,6 +11,7 @@ pub enum Role {
 #[derive(Clone, Serialize)]
 pub struct Session {
     pub id_empleado: i32,
+    pub nombre: String,
     pub rol: Role,
 }
 
