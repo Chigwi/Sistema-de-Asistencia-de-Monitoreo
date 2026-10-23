@@ -28,6 +28,13 @@
         </select>
         <button id="new_user" onclick="crearEmpleado()">+</button>
     </footer>
+    <dialog id="modalDetalles">
+    <h2>Detalles del empleado</h2>
+    <p><strong>Nombre:</strong> <span id="det_nombre"></span></p>
+    <p><strong>Cédula:</strong> <span id="det_cedula"></span></p>
+    <p><strong>Jornada:</strong> <span id="det_jornada"></span></p>
+    <button onclick="cerrarDetalles()">Cerrar</button>
+    </dialog>
     <script src="main.js"></script> 
 </body>
 </html>

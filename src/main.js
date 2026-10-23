@@ -46,7 +46,7 @@ function resetTabla(tableID){
   tablaRef.innerHTML = "";
 }
 
-function addEmpleado(tableID, nombre, estado){
+function addEmpleado(tableID, nombre, estado, id){
   //Inserta los empleados dentro de la pantalla del empleado
   //consigue la tabla de empleado
     var tableRef = document.getElementById(tableID);
@@ -67,7 +67,7 @@ function addEmpleado(tableID, nombre, estado){
 
     botonVerDetalles.innerHTML = "Ver Detalles";
     botonVerDetalles.setAttribute("class", "ver_detalles");
-    botonVerDetalles.setAttribute("onclick", "detallesEmpleado()");
+    botonVerDetalles.addEventListener("click", () => detallesEmpleado(id));
 
     nombreEmpleado.appendChild(nombreTexto);
 
@@ -140,9 +140,8 @@ function jornadaTexto(id) {
   if (id === 2) return "Nocturna";
   return "Sin horario";
 }
-
 async function cargarEmpleados() {
-  if (!document.getElementById("empleados")) return; // only admin.html has the table
+  if (!document.getElementById("empleados")) return;
 
   const filtro = document.getElementById("filtrar_empleado").value;
 
@@ -152,6 +151,7 @@ async function cargarEmpleados() {
     if (filtro === "conectado") {
       const lista = await invoke("logged_in_list");
       filas = lista.map(e => ({
+        id: e.id_empleado,
         nombre: e.nombre,
         estado: "En turno desde " + e.hora_inicio.slice(0, 5),
       }));
@@ -161,6 +161,7 @@ async function cargarEmpleados() {
         (b.fecha + (b.hora_salida || "")).localeCompare(a.fecha + (a.hora_salida || ""))
       );
       filas = lista.map(e => ({
+        id: e.id_empleado,
         nombre: e.nombre,
         estado: "Salió el " + e.fecha + " a las " + (e.hora_salida || "").slice(0, 5),
       }));
@@ -170,6 +171,7 @@ async function cargarEmpleados() {
         .filter(e => e.rol_empleado === 2)
         .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
       filas = empleados.map(e => ({
+        id: e.id_empleado,
         nombre: e.nombre,
         estado: jornadaTexto(e.horario_establecido),
       }));
@@ -179,15 +181,15 @@ async function cargarEmpleados() {
         .filter(e => e.rol_empleado === 2)
         .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
       filas = empleados.map(e => ({
+        id: e.id_empleado,
         nombre: e.nombre,
         estado: "En descanso",
       }));
     }
 
     resetTabla("empleados");
-    // addEmpleado inserts each row at the top, so go backwards to keep the order
     for (let i = filas.length - 1; i >= 0; i--) {
-      addEmpleado("empleados", filas[i].nombre, filas[i].estado);
+      addEmpleado("empleados", filas[i].nombre, filas[i].estado, filas[i].id);
     }
   } catch (err) {
     alert(err);
@@ -271,4 +273,28 @@ function mostrarTurnos(tableID, turnos) {
 
 function cerrarHistorial() {
   document.getElementById("modalHistorial").close();
+}
+
+
+async function detallesEmpleado(id) {
+  try {
+    const empleados = await invoke("list_employees");
+    const e = empleados.find(x => x.id_empleado === id);
+
+    if (!e) {
+      alert("Empleado no encontrado");
+      return;
+    }
+
+    document.getElementById("det_nombre").textContent = e.nombre;
+    document.getElementById("det_cedula").textContent = e.cedula;
+    document.getElementById("det_jornada").textContent = jornadaTexto(e.horario_establecido);
+    document.getElementById("modalDetalles").showModal();
+  } catch (err) {
+    alert(err);
+  }
+}
+
+function cerrarDetalles() {
+  document.getElementById("modalDetalles").close();
 }

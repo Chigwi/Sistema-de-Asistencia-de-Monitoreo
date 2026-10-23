@@ -3,14 +3,16 @@ use serde::{Deserialize,Serialize};
 use chrono::{NaiveTime,NaiveDate};
 
 
-#[derive (Queryable, Serialize)]
-pub struct EmpleadoActivo{
+#[derive(Queryable, Serialize)]
+pub struct EmpleadoActivo {
+    pub id_empleado: i32,
     pub nombre: String,
     pub hora_inicio: NaiveTime,
 }
 
 #[derive(Queryable, Serialize)]
 pub struct EmpleadoInactivo {
+    pub id_empleado: i32,
     pub nombre: String,
     pub fecha: NaiveDate,
     pub hora_inicio: NaiveTime,

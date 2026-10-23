@@ -41,6 +41,7 @@ pub fn find_logged_in (conn: &mut PgConnection) -> QueryResult<Vec<EmpleadoActiv
             historial_horario::hora_inicio.desc(),
         )
         .select((
+            empleado::id_empleado,
             empleado::nombre,
             historial_horario::hora_inicio
         ))
@@ -59,6 +60,7 @@ pub fn find_logged_out(conn: &mut PgConnection) -> QueryResult<Vec<EmpleadoInact
     historial_horario::hora_inicio.desc(),
      ))
     .select((
+        empleado::id_empleado,
         empleado::nombre,
         historial_horario::fecha,
         historial_horario::hora_inicio,
