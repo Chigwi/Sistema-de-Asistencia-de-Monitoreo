@@ -134,3 +134,61 @@ function mostrarNombre() {
 
 window.addEventListener("DOMContentLoaded", mostrarNombre);
 
+
+function jornadaTexto(id) {
+  if (id === 1) return "Diurna";
+  if (id === 2) return "Nocturna";
+  return "Sin horario";
+}
+
+async function cargarEmpleados() {
+  if (!document.getElementById("empleados")) return; // only admin.html has the table
+
+  const filtro = document.getElementById("filtrar_empleado").value;
+
+  try {
+    let filas = [];
+
+    if (filtro === "conectado") {
+      const lista = await invoke("logged_in_list");
+      filas = lista.map(e => ({
+        nombre: e.nombre,
+        estado: "En turno desde " + e.hora_inicio.slice(0, 5),
+      }));
+    } else if (filtro === "ultima_coneccion") {
+      const lista = await invoke("logged_out_list");
+      lista.sort((a, b) =>
+        (b.fecha + (b.hora_salida || "")).localeCompare(a.fecha + (a.hora_salida || ""))
+      );
+      filas = lista.map(e => ({
+        nombre: e.nombre,
+        estado: "Salió el " + e.fecha + " a las " + (e.hora_salida || "").slice(0, 5),
+      }));
+    } else if (filtro === "nombre") {
+      const lista = await invoke("list_employees");
+      const empleados = lista
+        .filter(e => e.rol_empleado === 2)
+        .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+      filas = empleados.map(e => ({
+        nombre: e.nombre,
+        estado: jornadaTexto(e.horario_establecido),
+      }));
+    }
+
+    resetTabla("empleados");
+    // addEmpleado inserts each row at the top, so go backwards to keep the order
+    for (let i = filas.length - 1; i >= 0; i--) {
+      addEmpleado("empleados", filas[i].nombre, filas[i].estado);
+    }
+  } catch (err) {
+    alert(err);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const filtro = document.getElementById("filtrar_empleado");
+  if (filtro) {
+    filtro.addEventListener("change", cargarEmpleados);
+    cargarEmpleados();
+  }
+});
